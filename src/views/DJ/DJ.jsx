@@ -43,7 +43,9 @@ class DJ extends Component {
     return (
       <div >
         <Grid style={ gridStyle }>
-          
+          <Grid> 
+            Pick a musical genre and emotion, and sing your song!
+          </Grid>
           <Grid> 
               <Radio value='none' checked={ this.state.palette === 'none' } onChange={this.handlePaletteChange}/> Rock
               <Radio value='jazz' checked={ this.state.palette === 'jazz' } onChange={this.handlePaletteChange}/> Lounge

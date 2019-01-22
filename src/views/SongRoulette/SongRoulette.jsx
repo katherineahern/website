@@ -15,8 +15,8 @@ import Song from '../../components/Song/Song';
 
 
 class SongRoulette extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.makeNewTitle = this.makeNewTitle.bind(this);
 		const songName = this.makeNewTitle();
 		this.state = {
@@ -82,6 +82,16 @@ class SongRoulette extends Component {
 
 		return (
 			<div>
+				<Card style={countdownStyle} >
+					<CardContent>
+						<div>
+							This is the title of a song that has never been sung before. 
+							After the count down, an accompanying track will play (or the play button will be available). 
+							Then it is your job to sing that brand new hit song!
+						</div>
+					</CardContent>
+					
+				</Card>
 				<Card style={countdownStyle} >
 					<CardContent>
 						<Typography variant="headline">{ this.state.songName }</Typography>
