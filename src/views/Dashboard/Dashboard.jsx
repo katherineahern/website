@@ -49,7 +49,7 @@ class Dashboard extends React.Component {
         </Grid>
         <Grid container>
           
-            <ItemGrid xs={12} sm={12} md={4}>
+            <ItemGrid xs={4} sm={4} md={4}>
               <a href="/roulette">
                 <ChartCard
                   chart={
@@ -74,7 +74,7 @@ class Dashboard extends React.Component {
               </a>
             </ItemGrid>
 
-          <ItemGrid xs={12} sm={12} md={4}>
+          <ItemGrid xs={4} sm={4} md={4}>
             <a href="/DJ">
               <ChartCard
                 chart={
@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
               />
             </a>
           </ItemGrid>
-          <ItemGrid xs={12} sm={12} md={4}>
+          <ItemGrid xs={4} sm={4} md={4}>
             <a href='/user'>
               <ChartCard
                 chart={
