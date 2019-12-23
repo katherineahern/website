@@ -3,12 +3,14 @@ import UserProfile from "views/UserProfile/UserProfile.jsx";
 import Icons from "views/Icons/Icons.jsx";
 import SongRoulette from "views/SongRoulette/SongRoulette";
 import DJ from "views/DJ/DJ";
+import HYA from "views/HYA/HYA";
 
 import {
   Speaker,
   Album,
   SettingsVoice,
-  MusicNote
+  MusicNote,
+  Face
 } from "@material-ui/icons";
 
 const dashboardRoutes = [
@@ -25,7 +27,7 @@ const dashboardRoutes = [
     navbarName: "Song Roulette",
     icon: SettingsVoice,
     component: SongRoulette
-  },
+  },  
   {
     path: "/DJ",
     sidebarName: "You're the DJ",
@@ -34,12 +36,20 @@ const dashboardRoutes = [
     component: DJ
   },
   {
+    path: "/hya",
+    sidebarName: "HYA",
+    navbarName: "HYA",
+    icon: Face,
+    component: HYA
+  },
+  {
     path: "/user",
     sidebarName: "About Me",
     navbarName: "About Me",
     icon: MusicNote,
     component: UserProfile
   },
+  
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
 ];
 
