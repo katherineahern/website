@@ -9,10 +9,6 @@ import {
   ItemGrid
 } from "components";
 
-import avatar from "assets/img/faces/tigers_nest.jpg";
-
-
-
 class HYA extends React.Component {
   constructor(props) {
     super(props);
@@ -35,15 +31,13 @@ class HYA extends React.Component {
     
   }
   
-  
-  
   render() {
     console.log(this.state.currentAmount);
     return (
       <div>
         <Grid container>
           <ItemGrid xs={12} sm={12} md={12}  >
-            <Grid container spacing={12}>
+            <Grid container>
               <TextField
                 id="testId"
                 label="How much do you want to donate?"
@@ -57,19 +51,51 @@ class HYA extends React.Component {
                {this.state.amounts.map((value, index) => {
                   return (
                     <Grid item id={value.shortname} xs>
-                      <Paper>
-                        {value.shortname}
-                      </Paper>
+                      <Combination shortname={value.shortname} currentAmount={this.state.currentAmount} />
+                        
                     </Grid>
                   );
                 })}
-                <Grid item xs>testId</Grid>
+          
             </Grid>
           </ItemGrid>
         </Grid>
       </div>
     );
   }
+}
+
+function Combination(props) {
+  let value = "Original";
+  let currentAmount = parseInt(props.currentAmount) ? parseInt(props.currentAmount) : 0;
+  const amounts = [
+          {shortname: "id", amount: 8}, //– Legal ID for one participant
+          {shortname: "socks", amount: 35}, // – 25 pairs of socks
+          {shortname: "supplies", amount: 100}, // – One week of supplies for every group HYA offers
+          {shortname: "underwear", amount: 250}, // – 60 pairs of clean underwear
+          {shortname: "sleeping", amount: 500}, // – 33 sleeping bags
+          {shortname: "medicine", amount: 500},// – One month of medical supplies
+          {shortname: "food", amount: 5000}, // – Four months of healthy, nutritious food
+          {shortname: "home", amount: 5000000}, //– A place for us to call HOME
+        ];
+  const getLargestDonation = (amount) => {
+    //while amount > amounts.amount, go to next amount
+    let i = 0;
+    while(amounts[i] && amounts[i].amount < currentAmount) {
+      i++;
+    }
+    //breaks at beginning and end
+    return amounts[i];
+    // return greatest amount that fits, and remainder
+  }
+  if (parseInt(props.currentAmount)) {
+    value = getLargestDonation(currentAmount) ? getLargestDonation(currentAmount).shortname : "no getLargestDonation";
+  }
+  return(
+    <Paper>
+      {props.shortname} {value}
+    </Paper>
+  )
 }
 
 export default HYA;
