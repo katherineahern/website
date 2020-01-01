@@ -68,6 +68,7 @@ class HYA extends React.Component {
 function Combination(props) {
   let value = "Original";
   let whatYouCanBuy = [];
+  let whatToBuyAmounts = {};
   let currentAmount = parseInt(props.currentAmount) ? parseInt(props.currentAmount) : 0;
   let remaining = currentAmount;
   const amounts = [
@@ -91,16 +92,33 @@ function Combination(props) {
   }
   
   while(remaining >= 8) {
+    //use shortname as key
+    let nextToBuy = nextLargestThatGoesIn(remaining);
+    if(whatToBuyAmounts[nextToBuy.shortname]) {
+      whatToBuyAmounts[nextToBuy.shortname] = whatToBuyAmounts[nextToBuy.shortname] + 1;
+    } else {
+      whatToBuyAmounts[nextToBuy.shortname] = 1;
+    }
     whatYouCanBuy.push(nextLargestThatGoesIn(remaining));
   }
   console.log(whatYouCanBuy);
+  console.log(whatToBuyAmounts);
   value = "temp"; //amounts[i] ? amounts[i].shortname : "Original II";
+
   return(
     <Paper>
-      {whatYouCanBuy.map((item) => {
-        return (<div>{item ? item.shortname : ""} {item ? item.amount : ""}</div>)
-      })}
+      { Object.keys(whatToBuyAmounts).map((shortname) => {
+          return (<Item itemName={shortname} amount={whatToBuyAmounts[shortname]} />)
+        })
+      }
+      
     </Paper>
+  )
+}
+
+function Item(props) {
+  return (
+    <div>{props.itemName} {props.amount}</div>
   )
 }
 
