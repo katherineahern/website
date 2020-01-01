@@ -67,8 +67,11 @@ class HYA extends React.Component {
 
 function Combination(props) {
   let value = "Original";
+  let whatYouCanBuy = [];
   let currentAmount = parseInt(props.currentAmount) ? parseInt(props.currentAmount) : 0;
+  let remaining = currentAmount;
   const amounts = [
+          {shortname: "N/A", amount: 0},
           {shortname: "id", amount: 8}, //– Legal ID for one participant
           {shortname: "socks", amount: 35}, // – 25 pairs of socks
           {shortname: "supplies", amount: 100}, // – One week of supplies for every group HYA offers
@@ -78,22 +81,25 @@ function Combination(props) {
           {shortname: "food", amount: 5000}, // – Four months of healthy, nutritious food
           {shortname: "home", amount: 5000000}, //– A place for us to call HOME
         ];
-  const getLargestDonation = (amount) => {
-    //while amount > amounts.amount, go to next amount
+  const nextLargestThatGoesIn = (amount) => {
     let i = 0;
-    while(amounts[i] && amounts[i].amount < currentAmount) {
+    while(amounts[i+1] && (amount > amounts[i+1].amount)) {
       i++;
     }
-    //breaks at beginning and end
+    remaining = remaining - amounts[i].amount;
     return amounts[i];
-    // return greatest amount that fits, and remainder
   }
-  if (parseInt(props.currentAmount)) {
-    value = getLargestDonation(currentAmount) ? getLargestDonation(currentAmount).shortname : "no getLargestDonation";
+  
+  while(remaining >= 8) {
+    whatYouCanBuy.push(nextLargestThatGoesIn(remaining));
   }
+  console.log(whatYouCanBuy);
+  value = "temp"; //amounts[i] ? amounts[i].shortname : "Original II";
   return(
     <Paper>
-      {props.shortname} {value}
+      {whatYouCanBuy.map((item) => {
+        return (<div>{item ? item.shortname : ""} {item ? item.amount : ""}</div>)
+      })}
     </Paper>
   )
 }
