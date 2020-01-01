@@ -14,16 +14,6 @@ class HYA extends React.Component {
     super(props);
     this.state = {
       currentAmount: 0,
-      amounts: [
-          {shortname: "id", amount: 8}, //– Legal ID for one participant
-          {shortname: "socks", amount: 35}, // – 25 pairs of socks
-          {shortname: "supplies", amount: 100}, // – One week of supplies for every group HYA offers
-          {shortname: "underwear", amount: 250}, // – 60 pairs of clean underwear
-          {shortname: "sleeping", amount: 500}, // – 33 sleeping bags
-          {shortname: "medicine", amount: 500},// – One month of medical supplies
-          {shortname: "food", amount: 5000}, // – Four months of healthy, nutritious food
-          {shortname: "home", amount: 5000000}, //– A place for us to call HOME
-        ]
     };
     this.handleChange = (event) => {
       this.setState({currentAmount: event.target.value});
@@ -35,31 +25,25 @@ class HYA extends React.Component {
     console.log(this.state.currentAmount);
     return (
       <div>
-        <Grid container>
-          <ItemGrid xs={12} sm={12} md={12}  >
-            <Grid container>
-              <TextField
-                id="testId"
-                label="How much do you want to donate?"
-                defaultValue={this.state.currentAmount}
-                onChange={this.handleChange}
-                helperText="Some important text"
-              />
-            </Grid>
-            <Grid container spacing={3}>
-              
-               {this.state.amounts.map((value, index) => {
-                  return (
-                    <Grid item id={value.shortname} xs>
-                      <Combination shortname={value.shortname} currentAmount={this.state.currentAmount} />
-                        
-                    </Grid>
-                  );
-                })}
-          
-            </Grid>
-          </ItemGrid>
+        <Grid container justify="space-evenly">
+
+          <Grid item xs="8">
+            <TextField
+              id="testId"
+              label="How much do you want to donate?"
+              defaultValue={this.state.currentAmount}
+              onChange={this.handleChange}
+              helperText="Some important text"
+            />
+          </Grid>
+
+          <Grid item >
+            <Button href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=813036333">Donate Now</Button>
+          </Grid>
         </Grid>
+        
+          <Combination currentAmount={this.state.currentAmount} />       
+        
       </div>
     );
   }
@@ -101,24 +85,25 @@ function Combination(props) {
     }
     whatYouCanBuy.push(nextLargestThatGoesIn(remaining));
   }
-  console.log(whatYouCanBuy);
-  console.log(whatToBuyAmounts);
-  value = "temp"; //amounts[i] ? amounts[i].shortname : "Original II";
 
   return(
-    <Paper>
+    <Grid container justify="center">
       { Object.keys(whatToBuyAmounts).map((shortname) => {
           return (<Item itemName={shortname} amount={whatToBuyAmounts[shortname]} />)
         })
       }
       
-    </Paper>
+    </Grid>
   )
 }
 
 function Item(props) {
   return (
-    <div>{props.itemName} {props.amount}</div>
+    <Grid item>
+      <Paper>
+        {props.itemName} {props.amount}
+      </Paper>
+    </Grid>
   )
 }
 
