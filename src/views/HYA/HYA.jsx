@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, InputLabel, Paper, TextField, Typography } from "material-ui";
+import { Grid, InputLabel, Paper, TextField, Typography, Card, CardContent, CardMedia } from "material-ui";
 
 import {
   ProfileCard,
@@ -25,6 +25,10 @@ class HYA extends React.Component {
     console.log(this.state.currentAmount);
     return (
       <div>
+        <Typography variant="h4">
+        
+          HYA exists to meet youth experiencing homelessness where they are, and to help them build healthier lives. 
+        </Typography>
         <Grid container justify="space-evenly">
 
           <Grid item xs="8">
@@ -33,7 +37,7 @@ class HYA extends React.Component {
               label="How much do you want to donate?"
               defaultValue={this.state.currentAmount}
               onChange={this.handleChange}
-              helperText="Some important text"
+              helperText="Please enter proposed donation."
             />
           </Grid>
 
@@ -58,13 +62,14 @@ function Combination(props) {
   const amounts = [
           //{shortname: "na", amount: 0},
           {shortname: "id", amount: 8, description: "Legal ID for one participant"}, //– 
-          {shortname: "socks", amount: 35, description: "25 pairs of socks"}, // – 
+          {shortname: "socks", amount: 35, description: "25 pairs of clean, new socks "}, // – 
           {shortname: "supplies", amount: 100, description: "One week of supplies for every group HYA offers"}, // – 
           {shortname: "underwear", amount: 250, description: "60 pairs of clean underwear"}, // – 
-          {shortname: "sleeping", amount: 500, description: "33 sleeping bags"}, // – 
+          {shortname: "sleeping", amount: 350, description: "23 sleeping bags"}, // – 
           {shortname: "medicine", amount: 500, description: "One month of medical supplies"},// – 
           {shortname: "food", amount: 5000, description: "Four months of healthy, nutritious food"}, // – 
           {shortname: "home", amount: 5000000, description: "A place for us to call HOME"}, //– 
+          {shortname: "home", amount: 5, description: "Other place"},
         ];
   const nextLargestThatGoesIn = (amount) => {
     if(amount > 5000001){
@@ -72,10 +77,9 @@ function Combination(props) {
       remaining = 0;
     }
     let i = 0;
-    while(amounts[i+1] && (amount > amounts[i+1].amount)) {
+    while(amounts[i+1] && (amount >= amounts[i+1].amount)) {
       i++;
     }
-    remaining = remaining - amounts[i].amount;
     return amounts[i];
   }
   
@@ -83,10 +87,11 @@ function Combination(props) {
     //use shortname as key
     let nextToBuy = nextLargestThatGoesIn(remaining);
     whatYouCanBuy.push(nextLargestThatGoesIn(remaining));
+    remaining = remaining - nextToBuy.amount;
   }
 
   return(
-    <Grid container justify="center">
+    <Grid container alignContent="space-around" alignItems="center">
       { whatYouCanBuy.map((item) => {
           return (<Item itemName={item.shortname} description={item.description} />)
         })
@@ -97,12 +102,27 @@ function Combination(props) {
 }
 
 function Item(props) {
+ 
   return (
-    <Grid item>
-      <Paper>
-        <Typography>{props.description}</Typography>
-        <img src={ require('../../assets/img/hya/' + props.itemName + '.svg') } /><br/>
-      </Paper>
+    <Grid item xs="3">
+      
+      <Card>
+        
+          
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+
+              <img src={ require('../../assets/img/hya/' + props.itemName + '.svg') } />
+          
+              
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              { props.description }
+            </Typography>
+          </CardContent>
+       
+        
+      </Card>
     </Grid>
   )
 }
