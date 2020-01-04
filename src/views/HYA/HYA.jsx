@@ -101,7 +101,9 @@ function Item(props) {
   return (
     <Grid item>
       <Paper>
-        {props.itemName} {props.amount}
+        <b>{props.amount} X</b><br/>
+        <img src={ require('../../assets/img/hya/' + props.itemName + '.svg') } /><br/>
+        <b>{props.itemName}</b>
       </Paper>
     </Grid>
   )
