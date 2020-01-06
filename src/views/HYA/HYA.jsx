@@ -18,7 +18,6 @@ class HYA extends React.Component {
     this.handleChange = (event) => {
       this.setState({currentAmount: event.target.value});
     }
-    
   }
   
   render() {
@@ -26,28 +25,30 @@ class HYA extends React.Component {
     return (
       <div>
         <Typography variant="h4">
-        
-          HYA exists to meet youth experiencing homelessness where they are, and to help them build healthier lives. 
+          Entering an amount below will show you how far your dollars can go with HYA to support homeless youth. 
+          When you are ready to make a donation, please visit the "Donate Now" button.
         </Typography>
         <Grid container justify="space-evenly">
-
           <Grid item xs="8">
             <TextField
               id="testId"
-              label="How much do you want to donate?"
-              defaultValue={this.state.currentAmount}
+              label="Enter amount:"
+              defaultValue="0"
               onChange={this.handleChange}
-              helperText="Please enter proposed donation."
+              helperText="" 
+              variant="outlined"
             />
           </Grid>
-
-          <Grid item >
+          <Grid item xs="4">
             <Button href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=813036333">Donate Now</Button>
           </Grid>
+          <Grid item xs="12">
+            <Typography variant="h6">
+              Your donation could provide the following to homeless youth:
+            </Typography>
+          </Grid>
         </Grid>
-        
-          <Combination currentAmount={this.state.currentAmount} />       
-        
+        <Combination currentAmount={this.state.currentAmount} />        
       </div>
     );
   }
@@ -105,23 +106,15 @@ function Item(props) {
  
   return (
     <Grid item xs="3">
-      
       <Card>
-        
-          
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-
               <img src={ require('../../assets/img/hya/' + props.itemName + '.svg') } />
-          
-              
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               { props.description }
             </Typography>
           </CardContent>
-       
-        
       </Card>
     </Grid>
   )
