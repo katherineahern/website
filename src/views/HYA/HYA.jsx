@@ -14,17 +14,22 @@ class HYA extends React.Component {
     super(props);
     this.state = {
       currentAmount: 0,
+      display: 'inline'
     };
     this.handleChange = (event) => {
       this.setState({currentAmount: event.target.value});
     }
+    this.handleFocus = () => {
+      this.setState({display: 'none'});
+    }
+    
   }
   
   render() {
-    console.log(this.state.currentAmount);
+    
     return (
       <div>
-        <Typography variant="h4">
+        <Typography variant="h4" style={{ display: this.state.display }} >
           Entering an amount below will show you how far your dollars can go with HYA to support homeless youth. 
           When you are ready to make a donation, please visit the "Donate Now" button.
         </Typography>
@@ -35,6 +40,7 @@ class HYA extends React.Component {
               label="Enter amount:"
               defaultValue="0"
               onChange={this.handleChange}
+              onFocus={this.handleFocus}
               helperText="" 
               variant="outlined"
             />
@@ -43,7 +49,7 @@ class HYA extends React.Component {
             <Button href="https://www.networkforgood.org/donation/MakeDonation.aspx?ORGID2=813036333">Donate Now</Button>
           </Grid>
           <Grid item xs="12">
-            <Typography variant="h6">
+            <Typography variant="h6" style={{ display: this.state.display }}>
               Your donation could provide the following to homeless youth:
             </Typography>
           </Grid>

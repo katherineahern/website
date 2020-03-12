@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import {
   withStyles,
   AppBar,
-  Toolbar,
-  IconButton,
-  Hidden,
-  Button
 } from "material-ui";
 import cx from "classnames";
 
